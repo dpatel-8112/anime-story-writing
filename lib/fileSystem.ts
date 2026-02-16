@@ -461,10 +461,14 @@ export function updateGoalProgress(): void {
   goals.forEach(goal => {
     if (goal.type === 'word-count') {
       goal.current = totalWords;
-      goal.completed = goal.current >= goal.target;
-    } else if (goal.type === 'chapter') {
+      if (goal.current >= goal.target && goal.status === 'active') {
+        goal.status = 'completed';
+      }
+    } else if (goal.type === 'chapter-count') {
       goal.current = chapters.length;
-      goal.completed = goal.current >= goal.target;
+      if (goal.current >= goal.target && goal.status === 'active') {
+        goal.status = 'completed';
+      }
     }
   });
 

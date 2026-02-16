@@ -92,7 +92,10 @@ export function searchByType(
   type: 'chapters' | 'characters' | 'world' | 'scenes'
 ): Chapter[] | Character[] | WorldElement[] | Scene[] {
   const results = searchAll(query);
-  return results[type];
+  if (type === 'world') {
+    return results.worldElements;
+  }
+  return results[type as keyof SearchResults] as Chapter[] | Character[] | WorldElement[] | Scene[];
 }
 
 export function advancedSearch(options: {

@@ -54,7 +54,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
 
       // Only update if content has actually changed
       if (currentContent !== newContent) {
-        editor.commands.setContent(newContent, false);
+        editor.commands.setContent(newContent, { emitUpdate: false });
       }
     }
   }, [content, editor]);

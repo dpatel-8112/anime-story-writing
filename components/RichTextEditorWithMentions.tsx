@@ -63,7 +63,7 @@ export default function RichTextEditorWithMentions({ content, onChange, placehol
       })),
       ...locations.map(loc => ({
         id: loc.id,
-        label: loc.title,
+        label: loc.name,
         type: 'location' as const
       }))
     ];
@@ -214,7 +214,7 @@ export default function RichTextEditorWithMentions({ content, onChange, placehol
       const newContent = content || '';
 
       if (currentContent !== newContent) {
-        editor.commands.setContent(newContent, false);
+        editor.commands.setContent(newContent, { emitUpdate: false });
       }
     }
   }, [content, editor]);

@@ -238,7 +238,7 @@ export default function SearchPage() {
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <h3 className="font-semibold text-gray-900 dark:text-gray-100">
-                          Chapter {chapter.number}: {chapter.title}
+                          Chapter {chapter.episodeNumber}: {chapter.title}
                         </h3>
                         {chapter.arc && (
                           <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -387,18 +387,6 @@ export default function SearchPage() {
                           <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 line-clamp-2">
                             {scene.description}
                           </p>
-                        )}
-                        {scene.tags && scene.tags.length > 0 && (
-                          <div className="flex gap-1 mt-2">
-                            {scene.tags.map((tag, idx) => (
-                              <span
-                                key={idx}
-                                className="text-xs px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
                         )}
                       </div>
                     </div>

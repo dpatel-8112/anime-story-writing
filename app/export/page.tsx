@@ -95,7 +95,7 @@ export default function ExportPage() {
         if (char.description) content += `Description: ${char.description}\n`;
         if (char.appearance) content += `Appearance: ${char.appearance}\n`;
         if (char.personality) content += `Personality: ${char.personality}\n`;
-        if (char.abilities.length > 0) content += `Abilities: ${char.abilities.join(', ')}\n`;
+        if (char.abilities && char.abilities.length > 0) content += `Abilities: ${char.abilities.join(', ')}\n`;
         if (char.backstory) content += `Backstory: ${char.backstory}\n`;
         content += '\n';
       });
@@ -116,9 +116,8 @@ export default function ExportPage() {
       Object.entries(groupedElements).forEach(([type, elements]) => {
         content += `\n--- ${type.toUpperCase()} ---\n\n`;
         elements.forEach(el => {
-          content += `${el.title}\n`;
+          content += `${el.name}\n`;
           if (el.description) content += `${el.description}\n`;
-          if (el.details) content += `${el.details}\n`;
           content += '\n';
         });
       });
@@ -165,7 +164,7 @@ export default function ExportPage() {
         if (char.description) content += `**Description:** ${char.description}\n\n`;
         if (char.appearance) content += `**Appearance:** ${char.appearance}\n\n`;
         if (char.personality) content += `**Personality:** ${char.personality}\n\n`;
-        if (char.abilities.length > 0) content += `**Abilities:** ${char.abilities.join(', ')}\n\n`;
+        if (char.abilities && char.abilities.length > 0) content += `**Abilities:** ${char.abilities.join(', ')}\n\n`;
         if (char.backstory) content += `**Backstory:** ${char.backstory}\n\n`;
         content += '---\n\n';
       });
@@ -184,9 +183,8 @@ export default function ExportPage() {
       Object.entries(groupedElements).forEach(([type, elements]) => {
         content += `\n### ${type.charAt(0).toUpperCase() + type.slice(1)}\n\n`;
         elements.forEach(el => {
-          content += `#### ${el.title}\n\n`;
+          content += `#### ${el.name}\n\n`;
           if (el.description) content += `${el.description}\n\n`;
-          if (el.details) content += `${el.details}\n\n`;
         });
       });
     }

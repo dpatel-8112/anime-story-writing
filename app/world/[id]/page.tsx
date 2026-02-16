@@ -26,8 +26,6 @@ export default function WorldElementEditorPage({ params }: { params: Promise<{ i
           name: '',
           type: 'location',
           description: '',
-          details: '',
-          significance: 'minor',
           relatedCharacters: [],
           relatedChapters: [],
           tags: [],
@@ -220,7 +218,7 @@ export default function WorldElementEditorPage({ params }: { params: Promise<{ i
               </label>
               <select
                 value={element.type}
-                onChange={(e) => setElement({ ...element, type: e.target.value })}
+                onChange={(e) => setElement({ ...element, type: e.target.value as WorldElement['type'] })}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100"
               >
                 <option value="location">Location</option>
@@ -257,19 +255,6 @@ export default function WorldElementEditorPage({ params }: { params: Promise<{ i
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100"
               rows={3}
               placeholder="Brief description of this element"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Detailed Information
-            </label>
-            <textarea
-              value={element.details}
-              onChange={(e) => setElement({ ...element, details: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100"
-              rows={8}
-              placeholder="Detailed information, history, rules, characteristics..."
             />
           </div>
 
@@ -312,143 +297,6 @@ export default function WorldElementEditorPage({ params }: { params: Promise<{ i
             </div>
           </div>
         </div>
-
-        {/* Type-Specific Fields */}
-        {element.type === 'location' && (
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 space-y-4">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Location Details
-            </h2>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Geography
-              </label>
-              <textarea
-                value={element.geography || ''}
-                onChange={(e) => setElement({ ...element, geography: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100"
-                rows={3}
-                placeholder="Terrain, climate, notable features..."
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Culture
-              </label>
-              <textarea
-                value={element.culture || ''}
-                onChange={(e) => setElement({ ...element, culture: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100"
-                rows={3}
-                placeholder="Cultural aspects, customs, traditions..."
-              />
-            </div>
-          </div>
-        )}
-
-        {element.type === 'organization' && (
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 space-y-4">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Organization Details
-            </h2>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Purpose
-              </label>
-              <textarea
-                value={element.purpose || ''}
-                onChange={(e) => setElement({ ...element, purpose: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100"
-                rows={2}
-                placeholder="Organization's goals and purpose..."
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Structure
-              </label>
-              <textarea
-                value={element.structure || ''}
-                onChange={(e) => setElement({ ...element, structure: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100"
-                rows={3}
-                placeholder="Hierarchy, leadership, membership..."
-              />
-            </div>
-          </div>
-        )}
-
-        {element.type === 'item' && (
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 space-y-4">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Item Details
-            </h2>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Properties
-              </label>
-              <textarea
-                value={element.properties || ''}
-                onChange={(e) => setElement({ ...element, properties: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100"
-                rows={3}
-                placeholder="Physical properties, abilities, limitations..."
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Origin
-              </label>
-              <textarea
-                value={element.origin || ''}
-                onChange={(e) => setElement({ ...element, origin: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100"
-                rows={2}
-                placeholder="How it was created or where it came from..."
-              />
-            </div>
-          </div>
-        )}
-
-        {element.type === 'concept' && (
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 space-y-4">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Concept Details
-            </h2>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Principles
-              </label>
-              <textarea
-                value={element.principles || ''}
-                onChange={(e) => setElement({ ...element, principles: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100"
-                rows={4}
-                placeholder="Core principles, rules, mechanics..."
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Limitations
-              </label>
-              <textarea
-                value={element.limitations || ''}
-                onChange={(e) => setElement({ ...element, limitations: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100"
-                rows={3}
-                placeholder="Constraints, weaknesses, boundaries..."
-              />
-            </div>
-          </div>
-        )}
 
         {/* Relationships */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
