@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Search, Filter, X, ChevronDown } from 'lucide-react';
 import { SearchResults } from '@/lib/searchHelpers';
@@ -8,7 +8,7 @@ import { SearchResults } from '@/lib/searchHelpers';
 type ContentType = 'all' | 'chapters' | 'characters' | 'world' | 'scenes';
 type SortBy = 'relevance' | 'date' | 'alphabetical';
 
-export default function SearchPage() {
+function SearchPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [query, setQuery] = useState(searchParams.get('q') || '');
@@ -424,5 +424,17 @@ export default function SearchPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex justify-center items-center h-96">
+        <p className="text-xl text-gray-600 dark:text-gray-400">Loading search...</p>
+      </div>
+    }>
+      <SearchPageContent />
+    </Suspense>
   );
 }
