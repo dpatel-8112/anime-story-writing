@@ -143,13 +143,17 @@ export interface TimelineEvent {
 
 export interface WritingGoal {
   id: string;
-  type: 'word-count' | 'chapter' | 'scene' | 'deadline';
+  type: 'word-count' | 'chapter-count' | 'custom';
+  title: string;
+  description?: string;
   target: number;
   current: number;
-  deadline?: string;
-  description: string;
-  completed: boolean;
+  period: 'daily' | 'weekly' | 'monthly' | 'one-time';
+  startDate: string;
+  endDate?: string;
+  status: 'active' | 'completed' | 'archived';
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface Comment {

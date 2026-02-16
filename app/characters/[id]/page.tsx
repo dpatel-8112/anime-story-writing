@@ -35,7 +35,7 @@ export default function CharacterEditorPage({ params }: { params: Promise<{ id: 
           abilities: [],
           relationships: [],
           backstory: '',
-          role: 'Supporting',
+          role: 'supporting',
           goals: '',
           conflicts: '',
           aliases: [],
